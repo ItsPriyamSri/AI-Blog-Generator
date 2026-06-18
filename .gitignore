@@ -55,6 +55,9 @@ Desktop.ini
 /blob-report/
 /playwright/.cache/
 
+# Agent and AI tool artifacts
+.agents/
+
 # Cache directories
 .eslintcache
 .parcel-cache
