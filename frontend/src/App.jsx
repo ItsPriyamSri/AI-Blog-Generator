@@ -73,9 +73,15 @@ export default function App() {
     }
   };
 
+  const loginAsGuest = () => {
+    const guestUser = { id: 'guest', name: 'Guest', email: 'guest@empathwrite.local', isGuest: true };
+    setUser(guestUser);
+    localStorage.setItem('empathwrite_user', JSON.stringify(guestUser));
+  };
+
   const logout = async () => {
     try {
-      await axios.post('/api/auth/logout');
+      if (!user?.isGuest) await axios.post('/api/auth/logout');
     } catch (err) {
       console.error('Logout error on backend:', err.message);
     } finally {
@@ -92,7 +98,7 @@ export default function App() {
   };
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout, loading }}>
+    <AuthContext.Provider value={{ user, login, signup, logout, loginAsGuest, loading }}>
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />

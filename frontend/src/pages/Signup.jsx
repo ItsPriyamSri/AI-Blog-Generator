@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../App.jsx';
-import { User, Mail, Lock, Feather, AlertCircle, RefreshCw } from 'lucide-react';
+import { User, Mail, Lock, Feather, AlertCircle, RefreshCw, UserCircle2 } from 'lucide-react';
 
 export default function Signup() {
-  const { signup, loading } = useAuth();
+  const { signup, loginAsGuest, loading } = useAuth();
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -121,6 +121,22 @@ export default function Signup() {
             )}
           </button>
         </form>
+
+        <div className="mt-4 flex items-center gap-3">
+          <div className="flex-1 h-px bg-slate-800" />
+          <span className="text-xs text-slate-600 shrink-0">or</span>
+          <div className="flex-1 h-px bg-slate-800" />
+        </div>
+
+        <button
+          id="guest-login-btn"
+          type="button"
+          onClick={loginAsGuest}
+          className="mt-4 w-full py-2.5 bg-transparent border border-slate-700 hover:border-slate-500 hover:bg-slate-800/40 text-slate-400 hover:text-slate-200 font-medium rounded-xl flex items-center justify-center gap-2 transition cursor-pointer"
+        >
+          <UserCircle2 size={18} />
+          Continue as Guest
+        </button>
 
         <div className="mt-6 text-center text-sm text-slate-500">
           Already have an account?{' '}
